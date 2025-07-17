@@ -14,13 +14,39 @@ public class StringFunctions {
 		String password="Liverpool";
 		System.out.println(password.equals("chelsea"));
 		System.out.println(password.equals("liverpool"));
-		System.out.println(password.equalsIgnoreCase("liverpool"));
+		System.out.println("Praffull".equalsIgnoreCase("praffull"));
 		
 		System.out.println(password.compareTo("Liverpool"));
 		
 		System.out.println(str.contains("walk")); //true
 		System.out.println(str.startsWith("We")); //false
-		System.out.println(str.endsWith("one"));
+		System.out.println(str.endsWith("one")); //true
+		
+		String slogan="technology is power technology is future";
+		System.out.println(slogan.indexOf("is"));
+		System.out.println(slogan.indexOf("is",13));
+		System.out.println(slogan.lastIndexOf('e'));
+		
+		System.out.println(slogan.replaceAll("technology","sports"));
+		System.out.println(slogan);
+		
+		String[] arr=slogan.split(" ");
+		for(String word:arr)
+			System.out.println(word);
+		
+		String film="pk,2014,comedy,amir khan,hindi,8.7";
+		arr=film.split(",");
+		for(String word:arr)
+			System.out.println(word);
+		
+		String city="   ";
+		System.out.println(city.isEmpty());
+		System.out.println(city.isBlank());
+		
+		System.out.println("-".repeat(10));
+		
+		String ps="chelsea786";
+		System.out.println(ps.matches("[a-z]+\\d+"));
 		
 	}
 
