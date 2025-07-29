@@ -6,7 +6,10 @@ public class StudentResult {
 		Student st=new Student();
 		//st.result="fail";
 		st.findResult(57);
-		st.showResult();	
+		st.showResult();
+		
+		st.findResult(23);
+		st.showResult();
 	}
 
 }

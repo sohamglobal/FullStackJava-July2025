@@ -6,6 +6,7 @@ public class Student {
 	
 	public void findResult(int marks)
 	{
+		this.marks=marks;
 		if(marks>=35)
 			result="pass";
 		else
