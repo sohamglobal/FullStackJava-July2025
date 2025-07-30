@@ -5,7 +5,7 @@ public class Person {
 	private String personName;
 	private String personCity;
 	
-	//Constructor function
+	//Empty (NoArg) Constructor function
 	public Person()
 	{
 		System.out.println("Welcome to Person class");
@@ -13,16 +13,22 @@ public class Person {
 		personCity="london";
 	}
 
-	public void newPerson(String personName,String personCity)
-	{
-		this.personName=personName;
-		this.personCity=personCity;
+	//parameterized constructor (all arg)
+	public Person(String personName, String personCity) {
+		this.personName = personName;
+		this.personCity = personCity;
 	}
+		
 	
 	public void display()
 	{
 		System.out.println("Name : "+personName);
-		System.out.println("City : "+personCity);		
+		System.out.println("City : "+personCity);
 	}
 
+	
+
+	
+
+	
 }
