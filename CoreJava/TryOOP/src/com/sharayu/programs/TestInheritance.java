@@ -3,11 +3,12 @@ import com.sohamglobal.classes.*;
 
 public class TestInheritance {
 	public static void main(String[] args) {
+		//Single
 		Two obj=new Two();
 		obj.calcSum(9, 13);
 		obj.calcSquare(23);
 		
-		
+		//Hierarchical
 		Dog brownie=new Dog();
 		brownie.eat(); //Animal inherited
 		brownie.bark(); //self Dog
@@ -17,6 +18,15 @@ public class TestInheritance {
 		t.hunt();
 		t.eat();
 		t.sleep();
+		
+		//Multilevel
+		GamingLaptop gLap=new GamingLaptop();
+		gLap.powerOn();  //Device
+		gLap.use("powerpoint presentation"); //Laptop
+		gLap.playGame(); //GamingLaptop
+		gLap.powerOff(); //Device
+		
+		
 	}
 
 }
