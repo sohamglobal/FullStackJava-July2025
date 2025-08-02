@@ -4,6 +4,7 @@ import com.sohamglobal.classes.*;
 public class TestInheritance {
 	public static void main(String[] args) {
 		//Single
+		//One x=new One(); as One is abstract base
 		Two obj=new Two();
 		obj.calcSum(9, 13);
 		obj.calcSquare(23);
