@@ -13,12 +13,18 @@ public class LinkedListDemo {
 		cities.add("tokyo");
 		cities.add("mumbai");
 		cities.add(null);
-		
+		cities.add(4, "chicago");
+		cities.remove(null);
 		System.out.println(cities);
 		
 		Iterator<String> it=cities.descendingIterator();
 		while(it.hasNext())
+		{
 			System.out.println(it.next());
+			//cities.add("berlin"); fail fast
+		}
+		
+		
 	}
 	
 
