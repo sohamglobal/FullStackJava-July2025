@@ -27,6 +27,7 @@ public class PriorityQueueDemo {
 		pqmax.add(75);
 		
 		System.out.println(pqmax);
+		//18,25,77,9,13,26,11,72,89,15
 	}
 
 }
