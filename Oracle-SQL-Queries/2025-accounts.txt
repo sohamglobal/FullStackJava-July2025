@@ -1,0 +1,58 @@
+create table accounts
+(
+    accno int primary key,
+    accnm varchar(50),
+    acctype varchar(10) not null,
+    balance float check (balance>=500)
+);
+
+INSERT INTO accounts VALUES (1001, 'Joe Root', 'saving', 12500);
+INSERT INTO accounts VALUES (1002, 'Alexis Mac Allister', 'current', 8900);
+INSERT INTO accounts VALUES (1003, 'Ben Stokes', 'fixed', 15000);
+INSERT INTO accounts VALUES (1004, 'Marcus Rashford', 'ppf', 47600);
+INSERT INTO accounts VALUES (1005, 'Jofra Archer', 'saving', 59800);
+INSERT INTO accounts VALUES (1006, 'Bukayo Saka', 'current', 11200);
+INSERT INTO accounts VALUES (1007, 'Jos Buttler', 'ppf', 613400);
+INSERT INTO accounts VALUES (1008, 'Phil Foden', 'fixed', 79200);
+INSERT INTO accounts VALUES (1009, 'Moeen Ali', 'saving', 28700);
+INSERT INTO accounts VALUES (1010, 'Jack Grealish', 'current', 10100);
+INSERT INTO accounts VALUES (1011, 'Chris Woakes', 'ppf', 57300);
+INSERT INTO accounts VALUES (1012, 'Declan Rice', 'fixed',38800);
+INSERT INTO accounts VALUES (1013, 'Sam Curran', 'saving', 49900);
+INSERT INTO accounts VALUES (1014, 'Mohamed Salah', 'current', 10500);
+INSERT INTO accounts VALUES (1015, 'Jonny Bairstow', 'ppf', 38700);
+INSERT INTO accounts VALUES (1016, 'James Maddison', 'fixed', 39400);
+INSERT INTO accounts VALUES (1017, 'Ollie Pope', 'saving', 88100);
+INSERT INTO accounts VALUES (1018, 'Jordan Henderson', 'current', 89700);
+INSERT INTO accounts VALUES (1019, 'Adil Rashid', 'ppf', 66500);
+INSERT INTO accounts VALUES (1020, 'Trent Alexander-Arnold', 'fixed', 10800);
+INSERT INTO accounts VALUES (1021, 'Mark Wood', 'saving', 38900);
+INSERT INTO accounts VALUES (1022, 'Mason Mount', 'current', 49500);
+INSERT INTO accounts VALUES (1023, 'Dominik Szoboszlai', 'ppf', 75200);
+INSERT INTO accounts VALUES (1024, 'Virgil Van Dijk', 'fixed', 30200);
+INSERT INTO accounts VALUES (1025, 'Liam Livingstone', 'saving', 58700);
+INSERT INTO accounts VALUES (1026, 'Callum Wilson', 'current', 59300);
+INSERT INTO accounts VALUES (1027, 'Alex Hales', 'ppf', 59900);
+INSERT INTO accounts VALUES (1028, 'Kalvin Phillips', 'fixed', 78800);
+INSERT INTO accounts VALUES (1029, 'David Willey', 'saving', 67600);
+INSERT INTO accounts VALUES (1030, 'Ibrahima Konate', 'current', 69400);
+INSERT INTO accounts VALUES (1031, 'Tom Banton', 'ppf', 78100);
+INSERT INTO accounts VALUES (1032, 'Luke Shaw', 'fixed', 78700);
+INSERT INTO accounts VALUES (1033, 'Bruno Fernandes', 'saving', 49200);
+INSERT INTO accounts VALUES (1034, 'Kieran Trippier', 'current', 39800);
+INSERT INTO accounts VALUES (1035, 'Craig Overton', 'ppf', 38900);
+INSERT INTO accounts VALUES (1036, 'James Tarkowski', 'fixed', 79500);
+INSERT INTO accounts VALUES (1037, 'Dom Sibley', 'saving', 98700);
+INSERT INTO accounts VALUES (1038, 'Harvey Barnes', 'current', 70200);
+INSERT INTO accounts VALUES (1039, 'Andy Robertson', 'ppf', 69400);
+INSERT INTO accounts VALUES (1040, 'Tyrone Mings', 'fixed', 49900);
+INSERT INTO accounts VALUES (1041, 'Steve Smith', 'saving', 58800);
+INSERT INTO accounts VALUES (1042, 'Anthony Gordon', 'current', 69700);
+INSERT INTO accounts VALUES (1043, 'Danny Briggs', 'ppf', 79300);
+INSERT INTO accounts VALUES (1044, 'Hugo Ekitike', 'fixed', 69100);
+INSERT INTO accounts VALUES (1045, 'Pat Cummins', 'saving', 38900);
+INSERT INTO accounts VALUES (1046, 'James Justin', 'current', 29400);
+INSERT INTO accounts VALUES (1047, 'Tom Curran', 'ppf', 78700);
+INSERT INTO accounts VALUES (1048, 'Lewis Dunk', 'fixed', 69800);
+INSERT INTO accounts VALUES (1049, 'Chris Jordan', 'saving', 59200);
+INSERT INTO accounts VALUES (1050, 'Alexander Isak', 'current', 59900);
