@@ -1,0 +1,82 @@
+-- Doctors Table
+CREATE TABLE doctors (
+    doctorid     NUMBER(5) PRIMARY KEY,
+    doctname     VARCHAR2(50) NOT NULL,
+    specialization VARCHAR2(30),
+    experience   NUMBER(2),
+    gender       CHAR(1) CHECK (gender IN ('M','F'))
+);
+
+-- Patients Table
+CREATE TABLE patients (
+    patno     NUMBER(5) PRIMARY KEY,
+    patnm     VARCHAR2(50) NOT NULL,
+    age       NUMBER(3),
+    gender    CHAR(1) CHECK (gender IN ('M','F')),
+    illness   VARCHAR2(50),
+    doctorid  NUMBER(5),
+    CONSTRAINT fk_doctor FOREIGN KEY (doctorid)
+        REFERENCES doctors(doctorid)
+);
+
+----------------------
+
+INSERT INTO doctors (doctorid, doctname, specialization, experience, gender)
+VALUES (101, 'Dr. Mehta', 'Cardiologist', 15, 'M');
+
+INSERT INTO doctors (doctorid, doctname, specialization, experience, gender)
+VALUES (102, 'Dr. Sharma', 'Neurologist', 12, 'F');
+
+INSERT INTO doctors (doctorid, doctname, specialization, experience, gender)
+VALUES (103, 'Dr. Iyer', 'Orthopedic', 10, 'M');
+
+INSERT INTO doctors (doctorid, doctname, specialization, experience, gender)
+VALUES (104, 'Dr. Khan', 'Dermatologist', 8, 'F');
+
+INSERT INTO doctors (doctorid, doctname, specialization, experience, gender)
+VALUES (105, 'Dr. Singh', 'General Physician', 20, 'M');
+
+-------------------
+
+-- Patients mapped to doctors (for INNER JOIN cases)
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (201, 'Amit Verma', 45, 'M', 'Heart Pain', 101);
+
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (202, 'Priya Rao', 30, 'F', 'Migraine', 102);
+
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (203, 'Rohan Das', 55, 'M', 'Arthritis', 103);
+
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (204, 'Neha Kulkarni', 28, 'F', 'Skin Allergy', 104);
+
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (205, 'Vikram Patil', 65, 'M', 'Diabetes', 105);
+
+-- Extra patients mapped to existing doctors (to show multiple matches)
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (206, 'Sneha Joshi', 40, 'F', 'Back Pain', 103);
+
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (207, 'Arjun Singh', 50, 'M', 'High BP', 101);
+
+-- Patients without doctors (for RIGHT/FULL JOIN demo)
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (208, 'Meena Gupta', 35, 'F', 'Fever', NULL);
+
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (209, 'Rahul Nair', 42, 'M', 'Cough', NULL);
+
+INSERT INTO patients (patno, patnm, age, gender, illness, doctorid)
+VALUES (210, 'Kiran Sharma', 60, 'F', 'Asthma', NULL);
+
+---------------
+
+select patients.patnm, patients.illness, doctors.doctname, doctors.specialization
+from patients left outer join doctors 
+on patients.doctorid=doctors.doctorid;
+
+
+insert into patients values (211,'John Wick',45,'M','Fever',107);
+delete from doctors where doctorid=101;
