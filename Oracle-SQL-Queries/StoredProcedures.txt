@@ -1,0 +1,79 @@
+
+create or replace procedure applyinterest
+as
+begin
+update accounts 
+    set balance=balance+round(balance*3/100)
+	where acctype='saving';
+update accounts 
+    set balance=balance+round(balance*6/100)
+	where acctype='fixed';
+update accounts 
+    set balance=balance+round(balance*8.5/100)
+	where acctype='ppf';
+update accounts 
+    set balance=balance+round(balance*2/100)
+	where acctype='current';
+end;
+
+
+call applyinterest();
+
+--------------
+
+create or replace procedure deposit(
+ano IN NUMBER,
+amt IN NUMBER
+) as
+begin
+update accounts
+set balance=balance+amt
+where accno=ano;
+end;
+
+
+call deposit(1002,5000);
+
+------------
+
+create or replace procedure withdraw(
+ano IN NUMBER,
+amt IN NUMBER
+) as
+begin
+update accounts
+set balance=balance-amt
+where accno=ano;
+
+IF SQL%ROWCOUNT=0 THEN
+   DBMS_OUTPUT.PUT_LINE('Account not found');
+ELSE
+   DBMS_OUTPUT.PUT_LINE('Withdraw successful...balance updated');
+END IF;
+end;
+
+
+call withdraw(1007,23000);
+Statement processed.
+Withdraw successful...balance updated
+
+call withdraw(1055,1300);
+Statement processed.
+Account not found
+------------
+
+
+create or replace procedure transfer(
+fromano IN NUMBER,
+toano IN NUMBER,
+amt IN NUMBER
+) as
+begin
+update accounts set balance=balance-amt where accno=fromano;
+update accounts set balance=balance+amt where accno=toano;
+end;
+
+
+call transfer(1007,1002,13900);
+
+
