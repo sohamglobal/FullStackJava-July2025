@@ -7,6 +7,7 @@ public class InsertEmployeesAuto {
 		
 		String empnm,dept,location;
 		float salary;
+		String choice;
 		
 		Connection con;
 		PreparedStatement pst;
@@ -20,7 +21,8 @@ public class InsertEmployeesAuto {
 			pst=con.prepareStatement("insert into employees(empnm,dept,location,salary) values(?,?,?,?)");
 			
 			
-			
+			do
+			{
 		System.out.print("Enter Employee Name: ");
         empnm = sc.nextLine();
 
@@ -39,6 +41,14 @@ public class InsertEmployeesAuto {
 		pst.setFloat(4, salary);
 		pst.executeUpdate();
 		System.out.println("Employee added successfully");
+		sc.nextLine();
+		System.out.print("Do you have any more employees to add? (yes/no) : ");
+		choice=sc.nextLine();
+		
+			}
+			while(choice.equalsIgnoreCase("yes"));
+		
+		con.close();
 		}
 		catch(Exception e)
 		{
