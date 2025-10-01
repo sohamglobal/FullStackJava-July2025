@@ -1,3 +1,19 @@
+/*
+ 1] Create a procedure to delete specified account
+
+DELIMITER $$
+
+create procedure delacc(IN ano int)
+begin
+delete from accounts
+where 
+accno=ano;
+end$$
+
+DELIMITER ;
+
+*/
+
 package com.sharayu.programs;
 
 import java.sql.*;
