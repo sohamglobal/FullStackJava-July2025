@@ -14,5 +14,7 @@
         <property name="show_sql">true</property>
         <property name="current_session_context_class">thread</property>
      	<property name="hbm2ddl.auto">none</property>
+     	
+     	<mapping class="com.sharayu.entities.Student"/>
     </session-factory>
 </hibernate-configuration>
