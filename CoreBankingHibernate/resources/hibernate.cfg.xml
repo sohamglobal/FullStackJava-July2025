@@ -16,5 +16,6 @@
      	<property name="hbm2ddl.auto">none</property>
      	
      	<mapping class="com.sharayu.entities.Student"/>
+     	<mapping class="com.sharayu.entities.Account"/>
     </session-factory>
 </hibernate-configuration>
