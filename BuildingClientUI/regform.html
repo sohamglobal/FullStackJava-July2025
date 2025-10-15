@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <br><br>
+        <h1 class="display-4">Registration Form</h1>
+        <hr>
+        <form method="post" action="Register">
+
+            <table class="table">
+                <tr>
+                    <td>UserID</td>
+                    <td><input type="text" name="uid" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="psw" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Full Name</td>
+                    <td><input type="text" name="fnm" id="" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>
+                        <textarea name="addr" id="" class="form-control" rows="3"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" name="gen" id="" value="male"> Male
+                        <input type="radio" name="gen" id="" value="female"> Female
+                    </td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>
+                        <select name="ct" id="" class="form-control">
+                            <option value="mumbai">Mumbai</option>
+                            <option value="hyderabad">Hyderabad</option>
+                            <option value="kochi">Kochi</option>
+                            <option value="lucknow">Lucknow</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hobbies</td>
+                    <td>
+                        <input type="checkbox" name="hob1" id="" value="music"> Music
+                        <input type="checkbox" name="hob2" id="" value="movies"> Movies
+                        <input type="checkbox" name="hob3" id="" value="travel"> Travel
+                    </td>
+                </tr>
+                <tr>
+                    <td>Joining Date</td>
+                    <td>
+                        <input type="date" name="jdt" id="" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td><input type="tel" name="mob" id="" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Profile Photo</td>
+                    <td><input type="file" name="ph" id="" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="btn btn-outline-primary"></td>
+                </tr>
+
+            </table>
+
+        </form>
+
+    </div>
+    
+</body>
+</html>
