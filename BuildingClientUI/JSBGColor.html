@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script>
+        function change()
+        {
+            document.body.style.backgroundColor='lightblue'
+        }
+        function reset()
+        {
+            document.body.style.backgroundColor='white'
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <br><br>
+        <h1 class="display-5">Changing background colors</h1>
+        <hr>
+        <input type="button" value="Change Color" onclick="change()" class="btn btn-outline-danger">
+        <input type="button" value="Reset" onclick="reset()" class="btn btn-outline-success">
+
+    </div>
+    
+</body>
+</html>
