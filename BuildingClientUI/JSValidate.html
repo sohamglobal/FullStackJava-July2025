@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script>
+        function validate()
+        {
+            ps=document.getElementById("psw").value;
+            mo=document.getElementById("mob").value;
+            if(ps.length<8 || mo.length!=10)
+            {
+                document.getElementById("error").innerHTML="Password must be >=8 and mobile must of 10 digits"
+                return false;
+            }
+            alert("Form data submitted to the server")
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <br><br>
+        <h1 class="display-5">Validation</h1>
+        <hr>
+        <form action="Register.jsp" method="post" onsubmit="return validate()">
+            <table class="table">
+                <tr>
+                    <td>UserID</td>
+                    <td><input type="text" name="uid" id="uid" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="psw" id="psw" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td><input type="text" name="mob" id="mob" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" class="btn btn-primary"></td>
+                </tr>
+
+            </table>
+            <br>
+            <span style="color:brown" id="error"></span>
+
+        </form>
+
+    </div>
+    
+</body>
+</html>
