@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login - UserSessions</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root{
+            --card-bg: rgba(255,255,255,0.12);
+            --accent1: #ff7a7a;
+            --accent2: #6a9cff;
+            --accent3: #8affc1;
+        }
+        html,body{
+            height:100%;
+            background: linear-gradient(135deg, rgba(106,156,255,0.12), rgba(138,255,193,0.08)) fixed;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        .page-wrap{
+            min-height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:40px 20px;
+        }
+        .login-card{
+            width:100%;
+            max-width:420px;
+            border-radius:14px;
+            padding:1.5rem;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+            box-shadow: 0 8px 28px rgba(20,30,60,0.12);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .brand {
+            width:64px;
+            height:64px;
+            border-radius:50%;
+            background: radial-gradient(circle at 30% 30%, var(--accent3), var(--accent2));
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            color:#fff;
+            font-weight:700;
+            font-size:20px;
+            box-shadow: 0 6px 18px rgba(60,80,120,0.12);
+            margin-bottom:0.5rem;
+        }
+        .login-title{
+            margin-bottom:1rem;
+            font-weight:600;
+            color:#520808;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+        }
+        label { color: #eef6ff; font-weight:500; }
+        .form-control{
+            background: rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.06);
+            color: #fff;
+        }
+        .form-control:focus{
+            box-shadow: 0 0 0 0.2rem rgba(106,156,255,0.12);
+            border-color: rgba(106,156,255,0.9);
+        }
+        .help-text{
+            color: rgba(255,255,255,0.68);
+            font-size:0.9rem;
+        }
+        .btn-grad{
+            background: linear-gradient(90deg,var(--accent1),var(--accent2));
+            border: none;
+            color: #fff;
+            font-weight:600;
+            box-shadow: 0 8px 20px rgba(90,120,200,0.12);
+        }
+        .small-link { color: #dfefff; text-decoration:underline; }
+        .invalid-feedback { display:block; }
+        @media (prefers-color-scheme: light){
+            body{ background: #f5f8ff; }
+            .login-card { background: #fff; color:#111; }
+            label, .help-text { color: #444; }
+            .form-control { color:#111; }
+            .small-link { color: #1a3aef; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrap">
+        <main class="login-card">
+            <div class="text-center mb-3">
+                <div class="brand">US</div>
+                <h4 class="login-title">Login Form</h4>
+                <div class="help-text">Sign in with your user id and password</div>
+            </div>
+
+            <form id="loginForm" action="Authenticate" method="post" novalidate>
+                <div class="mb-3">
+                    <label for="userid" class="form-label">User ID</label>
+                    <input id="userid" name="userid" type="text" class="form-control" placeholder="Enter user id" required autofocus>
+                    <div class="invalid-feedback">Please enter your user id.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <input id="password" name="password" type="password" class="form-control" placeholder="Enter password" required>
+                        <button id="togglePwd" type="button" class="btn btn-outline-light" title="Show / hide password" aria-label="Show or hide password">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8z"/><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" fill="#fff"/></svg>
+                        </button>
+                    </div>
+                    <div class="invalid-feedback">Please enter your password.</div>
+                </div>
+
+                <div class="d-grid mt-3 mb-2">
+                    <button id="submitBtn" type="submit" class="btn btn-grad btn-lg">Sign In</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="help-text">Not you? <a class="small-link" href="index.html">Return home</a></small>
+                    <small class="help-text">Need an account? <a class="small-link" href="UserRegistration.html">Sign up</a></small>
+                </div>
+
+                <div id="formAlert" class="mt-3" style="display:none;"></div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (function(){
+            const form = document.getElementById('loginForm');
+            const userid = document.getElementById('userid');
+            const password = document.getElementById('password');
+            const toggle = document.getElementById('togglePwd');
+            const submitBtn = document.getElementById('submitBtn');
+            const alertEl = document.getElementById('formAlert');
+
+            // Toggle password visibility
+            toggle.addEventListener('click', () => {
+                const type = password.type === 'password' ? 'text' : 'password';
+                password.type = type;
+                toggle.classList.toggle('active');
+            });
+
+            // Simple client-side validation with nice feedback
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let valid = true;
+                [userid, password].forEach((el) => {
+                    if (!el.value.trim()) {
+                        el.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        el.classList.remove('is-invalid');
+                    }
+                });
+
+                if (!valid) {
+                    alertEl.style.display = 'block';
+                    alertEl.innerHTML = '<div class="alert alert-danger py-2" role="alert">Please fill in required fields.</div>';
+                    return;
+                }
+
+                // show spinner on submit button and submit the form
+                submitBtn.disabled = true;
+                const original = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Signing in...';
+
+                // Slight delay for UX (optional) then submit to servlet
+                setTimeout(() => form.submit(), 300);
+            });
+
+            // Remove invalid state on input
+            [userid, password].forEach((el) => {
+                el.addEventListener('input', () => {
+                    if (el.value.trim()) el.classList.remove('is-invalid');
+                });
+            });
+        })();
+    </script>
+</body>
+</html></button></div>

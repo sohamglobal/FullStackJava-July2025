@@ -1,0 +1,221 @@
+<!-- File: UserRegistration.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>User Registration</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+
+    <style>
+        :root{
+            --accent-1: #7b2ff7;
+            --accent-2: #f107a3;
+            --accent-3: #ffb86b;
+            --card-glow: 0 10px 30px rgba(123,47,247,0.12);
+        }
+        body{
+            min-height:100vh;
+            background: radial-gradient(1200px 600px at 10% 10%, rgba(241,7,163,0.08), transparent 10%),
+                                    linear-gradient(135deg, rgba(123,47,247,0.12), rgba(241,7,163,0.08) 40%, rgba(255,184,107,0.04));
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:2rem;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        .brand-bar{
+            height:8px;
+            border-radius:8px 8px 0 0;
+            background: linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
+            box-shadow: 0 4px 14px rgba(241,7,163,0.08);
+        }
+        .register-card{
+            width:100%;
+            max-width:760px;
+            border:0;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow: var(--card-glow);
+        }
+        .logo {
+            display:inline-flex;
+            align-items:center;
+            gap:.6rem;
+            font-weight:600;
+            color:#343a40;
+        }
+        .logo .mark{
+            width:44px;
+            height:44px;
+            border-radius:10px;
+            background: linear-gradient(135deg,var(--accent-2),var(--accent-1));
+            display:inline-grid;
+            place-items:center;
+            color:white;
+            font-weight:700;
+            box-shadow: 0 6px 20px rgba(123,47,247,0.14);
+        }
+        .form-title{
+            font-weight:700;
+            letter-spacing:.2px;
+            color:#212529;
+        }
+        .footer-note{
+            font-size:.875rem;
+            color:#6c757d;
+        }
+        .required:after{
+            content:" *";
+            color:#d63384;
+        }
+    </style>
+</head>
+<body>
+    <div class="card register-card">
+        <div class="brand-bar"></div>
+        <div class="card-body p-4 p-md-5">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="logo">
+                    <div class="mark">UR</div>
+                    <div>
+                        <div>User Registry</div>
+                        <small class="text-muted">Create your account</small>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <div class="form-title">Sign Up</div>
+                    <div class="footer-note">Secure. Fast. Colorful.</div>
+                </div>
+            </div>
+
+            <form id="regForm" class="needs-validation" novalidate method="post" action="Register" autocomplete="off">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="userid" class="form-label required">User ID</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                            <input type="text" class="form-control" id="userid" name="userid" placeholder="choose a unique id" required minlength="4" maxlength="30">
+                            <div class="invalid-feedback">Please enter a user id (4+ characters).</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="password" class="form-label required">Password</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required minlength="6">
+                            <button class="btn btn-outline-secondary" type="button" id="togglePwd" title="Show/Hide password"><i class="bi bi-eye"></i></button>
+                            <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="fullname" class="form-label required">Full name</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Your full name" required>
+                        <div class="invalid-feedback">Please provide your full name.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="occupation" class="form-label">Occupation</label>
+                        <select class="form-select" id="occupation" name="occupation">
+                            <option value="">Choose...</option>
+                            <option>Student</option>
+                            <option>Developer</option>
+                            <option>Designer</option>
+                            <option>Manager</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 d-none" id="occupationOtherWrap">
+                        <label for="occupationOther" class="form-label">Please specify</label>
+                        <input type="text" class="form-control" id="occupationOther" name="occupationOther" placeholder="Your occupation">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="mobile" class="form-label required">Mobile</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">+91</span>
+                            <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="e.g. 5551234567" required>
+                            <div class="invalid-feedback">Enter a valid mobile number (10 digits).</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="#" tabindex="-1">terms & conditions</a>.
+                            </label>
+                            <div class="invalid-feedback">You must agree before submitting.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end">
+                        <button class="btn btn-outline-secondary me-2" type="reset">Reset</button>
+                        <button class="btn btn-primary" type="submit"><i class="bi bi-check2-circle me-1"></i> Register</button>
+                    </div>
+                </div>
+            </form>
+
+            <hr class="my-4">
+
+            <div class="text-center text-muted small">
+                Already have an account? <a href="Login.html">Sign in</a> • <span class="ms-2">Privacy-respecting demo form</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS + small helper script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function(){
+            // Bootstrap custom validation
+            const form = document.getElementById('regForm');
+            form.addEventListener('submit', function(e){
+                if (!form.checkValidity()){
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+
+            // Toggle password visibility
+            const pwd = document.getElementById('password');
+            const toggleBtn = document.getElementById('togglePwd');
+            toggleBtn.addEventListener('click', function(){
+                const icon = this.querySelector('i');
+                if (pwd.type === 'password'){ pwd.type = 'text'; icon.className = 'bi bi-eye-slash'; }
+                else { pwd.type = 'password'; icon.className = 'bi bi-eye'; }
+            });
+
+            // Show/hide occupation "Other"
+            const occ = document.getElementById('occupation');
+            const occWrap = document.getElementById('occupationOtherWrap');
+            occ.addEventListener('change', function(){
+                if (this.value === 'Other'){
+                    occWrap.classList.remove('d-none');
+                    document.getElementById('occupationOther').setAttribute('required','');
+                } else {
+                    occWrap.classList.add('d-none');
+                    const other = document.getElementById('occupationOther');
+                    other.removeAttribute('required');
+                    other.value = '';
+                }
+            });
+
+            // Mobile input helper: allow only digits
+            const mobile = document.getElementById('mobile');
+            mobile.addEventListener('input', function(){
+                this.value = this.value.replace(/[^0-9]/g,'');
+            });
+        })();
+    </script>
+</body>
+</html>
