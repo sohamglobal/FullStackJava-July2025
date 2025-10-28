@@ -12,7 +12,7 @@
 <%
 String cho=request.getParameter("choice");
 Cookie c1=new Cookie("userchoice",cho);
-c1.setMaxAge(30); //seconds
+//c1.setMaxAge(30); //seconds
 response.addCookie(c1);
 %>
 <br>
