@@ -13,12 +13,15 @@ public class PraffullController {
 		return "index.html";
 	}
 	
+	// http://localhost:8080/contact
 	@GetMapping("/contact")
 	public String contact()
 	{
 		return "ContactUs.html";
 	}
 	
+	
+	//<form method="post" action="welcome">
 	@PostMapping("/welcome")
 	public String welcome()
 	{
