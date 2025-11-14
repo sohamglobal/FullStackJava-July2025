@@ -3,6 +3,9 @@ package com.sohamglobal.response04.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.sohamglobal.response04.dtos.Film;
 
 @Controller
 public class SharayuController {
@@ -26,6 +29,21 @@ public class SharayuController {
 		m.addAttribute("tech", tech);
 		m.addAttribute("demoby", "Praffull");
 		return "ShowingJavaData.jsp";
+	}
+	
+	@GetMapping("/newfilm")
+	public String newFilm()
+	{
+		return "AcceptFilmData.html";
+	}
+	
+	@PostMapping("/addfilm")
+	public String addFilm(Film obj,Model model)
+	{
+		System.out.println(obj.getFilmname());
+		
+		model.addAttribute("film",obj);
+		return "FilmAdded.jsp";
 	}
 
 }
