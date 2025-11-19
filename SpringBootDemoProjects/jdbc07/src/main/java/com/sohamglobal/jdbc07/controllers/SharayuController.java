@@ -37,5 +37,20 @@ public class SharayuController {
 		m.addAttribute("status", stat);
 		return "newaccountstatus.jsp";
 	}
+	
+	@GetMapping("/search")
+	public String search()
+	{
+		return "search.html";
+	}
+	
+	@PostMapping("/searchacc")
+	public String searchAcc(int accno,Model m)
+	{
+		
+		Account obj=accServices.searchAccount(accno);
+		m.addAttribute("acc", obj);
+		return "AccountInfo.jsp";
+	}
 
 }
