@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Entry Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #b7deeb;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 420px;
+            margin: 50px auto;
+            background: #e2e3e2;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #444;
+        }
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #4b7bec;
+            box-shadow: 0 0 4px rgba(75,123,236,0.4);
+        }
+        .btn-row {
+            text-align: center;
+            margin-top: 15px;
+        }
+        button {
+            padding: 8px 18px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #fff;
+        }
+        .btn-submit {
+            background-color: #27ae60;
+        }
+        .btn-reset {
+            background-color: #c0392b;
+        }
+        .btn-submit:hover {
+            background-color: #219150;
+        }
+        .btn-reset:hover {
+            background-color: #a83225;
+        }
+
+        .msg {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .msg.success {
+            color: #27ae60;
+        }
+        .msg.error {
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Account Entry Form</h2>
+    <form id="accountForm" method="post" action="addacc">
+        <div class="form-group">
+            <label for="accno">Account Number</label>
+            <input type="number" id="accno" name="accno" autocomplete="off" required>
+        </div>
+
+        <div class="form-group">
+            <label for="accnm">Account Name</label>
+            <input type="text" id="accnm" name="accnm" autocomplete="off" required>
+        </div>
+
+        <div class="form-group">
+            <label for="acctype">Account Type</label>
+            <select id="acctype" name="acctype" required>
+                <option value="">-- Select Type --</option>
+                <option value="saving">Saving</option>
+                <option value="current">Current</option>
+                <option value="fixed">Fixed</option>
+                <option value="ppf">PPF</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="balance">Balance</label>
+            <input type="number" step="0.01" id="balance" name="balance" required>
+        </div>
+
+        <div class="btn-row">
+            <button type="submit" class="btn-submit">Save</button>
+            <button type="reset" class="btn-reset">Clear</button>
+        </div>
+
+        <div id="message" class="msg"></div>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('accountForm');
+    const msg = document.getElementById('message');
+
+    form.addEventListener('submit', function (e) {
+        //e.preventDefault(); // remove this later when connecting to backend
+
+        // Simple front-end validation demo
+        const accno = document.getElementById('accno').value.trim();
+        const accnm = document.getElementById('accnm').value.trim();
+        const acctype = document.getElementById('acctype').value;
+        const balance = document.getElementById('balance').value.trim();
+
+        if (!accno || !accnm || !acctype || !balance) {
+            msg.textContent = "Please fill all fields.";
+            msg.className = "msg error";
+            return;
+        }
+
+        msg.textContent = "Account details captured successfully (demo).";
+        msg.className = "msg success";
+
+        // If you want to clear fields after success:
+        // form.reset();
+    });
+</script>
+
+</body>
+</html>
