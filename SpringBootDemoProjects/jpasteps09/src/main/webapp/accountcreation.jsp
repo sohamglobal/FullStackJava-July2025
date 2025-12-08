@@ -9,7 +9,7 @@
 <body>
 <h1>New Account Creation</h1>
 <hr>
-Status: Successful
+Status: ${stat}
 <br><br>
 <a href="/">Home</a>
 </body>

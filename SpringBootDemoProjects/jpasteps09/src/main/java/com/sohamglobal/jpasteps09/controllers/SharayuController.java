@@ -45,5 +45,43 @@ public class SharayuController {
 		m.addAttribute("acclist", list);
 		return "accreport.jsp";
 	}
+	
+	@GetMapping("/depo")
+	public String depo()
+	{
+		return "depositform.html";
+	}
+	
+	@PostMapping("/deposit")
+	public String deposit(int accno,float amount)
+	{
+		System.out.println(accno);
+		System.out.println(amount);
+		
+		Account obj=accRepo.findById(accno).get();
+		System.out.println("Name : "+obj.getAccnm());
+		System.out.println("Type : "+obj.getAcctype());
+		System.out.println("Balance : "+obj.getBalance());
+		
+		obj.setBalance(obj.getBalance()+amount);
+		System.out.println("Balance : "+obj.getBalance());
+		accRepo.save(obj);
+		
+		return "depositdone.jsp";
+	}
+	
+	@GetMapping("/del")
+	public String del()
+	{
+		return "delete.html";
+	}
+	
+	@PostMapping("/delete")
+	public String delete(int accno)
+	{
+		Account obj=accRepo.findById(accno).get();
+		accRepo.delete(obj);
+		return "deleted.jsp";
+	}
 
 }
