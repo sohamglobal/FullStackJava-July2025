@@ -2,6 +2,7 @@ package com.sohamglobal.jpasteps09.controllers;
 
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +32,25 @@ public class SharayuController {
 	}
 	
 	@PostMapping("/addacc")
-	public String addAccount(Account obj)
+	public String addAccount(Account obj,Model m)
 	{
-		accRepo.save(obj);
+		String msg="";
+		try
+		{
+			if(accRepo.existsById(obj.getAccno()))
+			{
+				throw new IllegalArgumentException("Account already exists");
+			}
+			
+			accRepo.save(obj);
+			msg="Account opened successfully";
+		}
+		catch(IllegalArgumentException e)
+		{
+			msg=e.getMessage();
+		}
+		
+		m.addAttribute("stat", msg);
 		return "accountcreation.jsp";
 	}
 	
@@ -77,11 +94,41 @@ public class SharayuController {
 	}
 	
 	@PostMapping("/delete")
-	public String delete(int accno)
+	public String delete(int accno,Model m)
 	{
+		String msg="";
+		
+		try
+		{
 		Account obj=accRepo.findById(accno).get();
 		accRepo.delete(obj);
+		msg="Account closed successfully";
+		}
+		catch(Exception e)
+		{
+			msg="Account not found";
+		}
+		
+		
+		m.addAttribute("stat", msg);
 		return "deleted.jsp";
+	}
+	
+	@GetMapping("/searchtype")
+	public String searchType()
+	{
+		return "searchtype.html";
+	}
+	
+	@PostMapping("/searchbytype")
+	public String searchByType(String acctype,Model m)
+	{
+		List<Account> list=accRepo.findByAcctype(acctype);
+		list.stream().forEach(obj->System.out.println(obj.getAccnm()));
+		
+		m.addAttribute("typ", acctype);
+		m.addAttribute("acclist", list);
+		return "listbytype.jsp";
 	}
 
 }
