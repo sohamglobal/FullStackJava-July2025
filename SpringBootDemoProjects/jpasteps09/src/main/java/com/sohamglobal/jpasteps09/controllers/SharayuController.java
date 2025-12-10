@@ -22,6 +22,10 @@ public class SharayuController {
 	@GetMapping("/")
 	public String homePage()
 	{
+		System.out.println(accRepo.getAccountName(1052));
+		System.out.println("-------------");
+		List<Account> list=accRepo.findByBalanceBetween(20000, 45000);
+		list.stream().forEach(obj->System.out.println(obj.getAccnm()));
 		return "index.html";
 	}
 	

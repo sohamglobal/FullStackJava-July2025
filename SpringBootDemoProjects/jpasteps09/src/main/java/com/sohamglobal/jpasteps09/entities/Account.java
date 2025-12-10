@@ -10,8 +10,8 @@ public class Account {
 	
 	@Id
 	private int accno;
-	private String accnm;
-	private String acctype;
+	private String accnm;   //   Account findByAccnm(String accnm)
+	private String acctype; //   List<Account> findByAcctype(String acctype)
 	private float balance;
 	public int getAccno() {
 		return accno;
