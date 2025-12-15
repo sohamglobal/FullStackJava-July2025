@@ -1,5 +1,7 @@
 package com.sohamglobal.usedcars11.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,13 @@ public class CarController {
 	@Autowired
 	private UsedCarServices carServices;
 	
-	@Autowired
-	private EnquiryServices enqServices;
+	
 	
 	@GetMapping("/")
-	public String homePage()
+	public String homePage(Model model)
 	{
+		List<UsedCar> list=carServices.getAllCars();
+		model.addAttribute("carlist", list);
 		return "index.jsp";
 	}
 
@@ -47,21 +50,9 @@ public class CarController {
 	@PostMapping("/savecar")
 	public String saveCar(UsedCar car)
 	{
-		carServices.addNewCar(car);
+		String stat=carServices.addNewCar(car);
 		return "NewCarAdded.jsp";
 	}
 	
-	@GetMapping("/newenq")
-	public String newEnq()
-	{
-		return "NewEnquiry.html";
-	}
 	
-	@PostMapping("/saveenq")
-	public String saveEnq(Enquiry enq,Model m)
-	{
-		enqServices.addNewEnquiry(enq);
-		m.addAttribute("enquiry", enq);
-		return "NewEnquiryAdded.jsp";
-	}
 }

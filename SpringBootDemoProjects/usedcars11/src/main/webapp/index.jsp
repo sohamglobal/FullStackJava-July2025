@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -94,39 +95,25 @@
         <div class="card p-4">
             <h4 class="section-title mb-4"><i class="bi bi-car-front"></i> Available Used Cars</h4>
 
+
+<c:forEach items="${carlist}" var="car"> 
+
             <div class="row g-3">
                 <!-- Sample Car Card -->
                 <div class="col-md-6">
                     <div class="card car-card p-3">
-                        <h5>Maruti Swift</h5>
-                        <p class="mb-1"><i class="bi bi-calendar"></i> 2020</p>
-                        <p class="mb-1"><i class="bi bi-fuel-pump"></i> Petrol</p>
-                        <p class="mb-1"><i class="bi bi-speedometer2"></i> 35,000 km</p>
-                        <h6 class="text-success">₹ 5,50,000</h6>
+                        <h5>${car.model}</h5>
+                        <p class="mb-1"><i class="bi bi-calendar"></i>${car.mfgYear}</p>
+                        <p class="mb-1"><i class="bi bi-fuel-pump"></i>${car.fuelType}</p>
+                        <p class="mb-1"><i class="bi bi-speedometer2"></i>${car.kilometers}</p>
+                        <h6 class="text-success">₹ ${car.price}</h6>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="card car-card p-3">
-                        <h5>Hyundai i20</h5>
-                        <p class="mb-1"><i class="bi bi-calendar"></i> 2019</p>
-                        <p class="mb-1"><i class="bi bi-fuel-pump"></i> Diesel</p>
-                        <p class="mb-1"><i class="bi bi-speedometer2"></i> 42,000 km</p>
-                        <h6 class="text-success">₹ 6,20,000</h6>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="card car-card p-3">
-                        <h5>Tata Nexon</h5>
-                        <p class="mb-1"><i class="bi bi-calendar"></i> 2021</p>
-                        <p class="mb-1"><i class="bi bi-fuel-pump"></i> Petrol</p>
-                        <p class="mb-1"><i class="bi bi-speedometer2"></i> 28,000 km</p>
-                        <h6 class="text-success">₹ 8,40,000</h6>
-                    </div>
-                </div>
-
+               
             </div>
+
+</c:forEach>
+
         </div>
     </div>
 </div>

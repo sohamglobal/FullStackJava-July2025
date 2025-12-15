@@ -1,5 +1,7 @@
 package com.sohamglobal.usedcars11.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,11 @@ public class UsedCarServices {
 	{
 		carsRepo.save(car);
 		return "success";
+	}
+	
+	public List<UsedCar> getAllCars()
+	{
+		return carsRepo.findAll();
 	}
 
 }

@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 public class UsedCar {
 	
 	@Id
+	@Column(name="carid")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int carId;
 	
@@ -25,7 +26,7 @@ public class UsedCar {
 	private int mfgYear;
 	
 	@Column(name="kilometers",nullable=false)
-	private int kilometeres;
+	private int kilometers;
 	
 	@Column(name="fueltype", nullable=false)
 	private String fuelType;
@@ -68,11 +69,11 @@ public class UsedCar {
 	public void setMfgYear(int mfgYear) {
 		this.mfgYear = mfgYear;
 	}
-	public int getKilometeres() {
-		return kilometeres;
+	public int getKilometers() {
+		return kilometers;
 	}
-	public void setKilometeres(int kilometeres) {
-		this.kilometeres = kilometeres;
+	public void setKilometers(int kilometers) {
+		this.kilometers = kilometers;
 	}
 	public String getFuelType() {
 		return fuelType;
