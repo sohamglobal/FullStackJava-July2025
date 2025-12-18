@@ -3,8 +3,11 @@ package com.sohamglobal.bankrest12.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,16 +21,27 @@ public class AccountController {
 	@Autowired
 	private AccountServices accServices;
 	
+	//GET End point ->  http://localhost:8083/bank/api/all
+	@CrossOrigin(origins = "*")
 	@GetMapping("/all")
 	public List<Account> getAll()
 	{
 		return accServices.getAllAccounts();
 	}
 	
+	//GET End point ->  http://localhost:8083/bank/api/search/1035
+	// allow the service to be called from any third party client
+	@CrossOrigin(origins = "*")
 	@GetMapping("/search/{accno}")
 	public Account searchAccount(@PathVariable int accno)
 	{
 		return accServices.getOneAccount(accno);
+	}
+	
+	@PostMapping("/add")
+	public Account addAccount(@RequestBody Account acc)
+	{
+		return accServices.addNewAccount(acc);
 	}
 
 }

@@ -23,5 +23,10 @@ public class AccountServices {
 	{
 		return accRepo.findById(accno).get();
 	}
+	
+	public Account addNewAccount(Account obj)
+	{
+		return accRepo.save(obj);
+	}
 
 }
