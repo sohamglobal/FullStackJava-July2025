@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Account Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #2c5364, #00bf8f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .search-card {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #1d2671, #00bf8f);
+            color: white;
+            text-align: center;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .btn-search {
+            background: linear-gradient(135deg, #1d2671, #00bf8f);
+            border: none;
+        }
+
+        .btn-search:hover {
+            opacity: 0.9;
+        }
+
+        .result-card {
+            margin-top: 20px;
+            border: 2px solid #00bf8f;
+            border-radius: 12px;
+            padding: 15px;
+            background: #f8fffd;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #1d2671;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card search-card">
+    <div class="card-header p-4">
+        <h3>🏦 Account Search</h3>
+        <p class="mb-0">Enter Account Number</p>
+    </div>
+
+    <div class="card-body p-4">
+        <input type="number" id="accno" class="form-control mb-3" placeholder="Account Number">
+
+        <button class="btn btn-search text-white w-100" onclick="searchAccount()">
+            Search Account
+        </button>
+
+        <div id="result"></div>
+        <div id="error" class="error"></div>
+    </div>
+</div>
+
+<script>
+    function searchAccount() {
+        const accno = document.getElementById("accno").value;
+        const resultDiv = document.getElementById("result");
+        const errorDiv = document.getElementById("error");
+
+        resultDiv.innerHTML = "";
+        errorDiv.innerHTML = "";
+
+        if (!accno) {
+            errorDiv.innerText = "Please enter account number";
+            return;
+        }
+
+        fetch(`http://localhost:8083/bank/api/search/${accno}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Account not found");
+                }
+                return response.json();
+            })
+            .then(data => {
+                resultDiv.innerHTML = `
+                    <div class="result-card">
+                        <p><span class="label">Account Number:</span> ${data.accno}</p>
+                        <p><span class="label">Account Name:</span> ${data.accnm}</p>
+                        <p><span class="label">Account Type:</span> ${data.acctype}</p>
+                        <p><span class="label">Balance:</span> ₹${data.balance}</p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                errorDiv.innerText = error.message;
+            });
+    }
+</script>
+
+</body>
+</html>

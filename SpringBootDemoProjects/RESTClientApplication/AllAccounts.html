@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Accounts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #00d4ff 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .account-card {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: white;
+            margin-bottom: 25px;
+        }
+        .account-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+        .card-body {
+            padding: 25px;
+        }
+        .account-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .detail-label {
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        .detail-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+        }
+        .error {
+            background-color: rgba(255,0,0,0.2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💳 Bank Accounts</h1>
+        <div id="loading" class="loading">Loading accounts...</div>
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="accountsContainer" class="row"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function fetchAccounts() {
+            try {
+                const response = await fetch('http://localhost:8083/bank/api/all');
+                if (!response.ok) throw new Error('Failed to fetch accounts');
+                
+                const accounts = await response.json();
+                displayAccounts(accounts);
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = `Error: ${error.message}`;
+            }
+        }
+
+        function displayAccounts(accounts) {
+            const container = document.getElementById('accountsContainer');
+            container.innerHTML = '';
+            
+            accounts.forEach(account => {
+                const card = document.createElement('div');
+                card.className = 'col-md-6 col-lg-4';
+                card.innerHTML = `
+                    <div class="card account-card">
+                        <div class="card-body">
+                            <div class="account-detail">
+                                <span class="detail-label">Name:</span>
+                                <span class="detail-value">${account.accnm}</span>
+                            </div>
+                            <div class="account-detail">
+                                <span class="detail-label">Account No:</span>
+                                <span class="detail-value">${account.accno}</span>
+                            </div>
+                            <div class="account-detail">
+                                <span class="detail-label">Type:</span>
+                                <span class="detail-value">${account.acctype}</span>
+                            </div>
+                            <div class="account-detail">
+                                <span class="detail-label">Balance:</span>
+                                <span class="detail-value">₹${account.balance.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        fetchAccounts();
+    </script>
+</body>
+</html>
