@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,10 +40,31 @@ public class AccountController {
 		return accServices.getOneAccount(accno);
 	}
 	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/search/type/{acctype}")
+	public List<Account> getByType(@PathVariable String acctype)
+	{
+		return accServices.searchByType(acctype);
+	}
+	
+	
+	@CrossOrigin(origins = "*")
 	@PostMapping("/add")
 	public Account addAccount(@RequestBody Account acc)
 	{
 		return accServices.addNewAccount(acc);
+	}
+	
+	@PutMapping("/deposit")
+	public String deposit(int accno,float amount)
+	{
+		return accServices.depositAmount(accno, amount);
+	}
+	
+	@DeleteMapping("/close")
+	public String closeAccount(int accno)
+	{
+		return accServices.deleteAccount(accno);
 	}
 
 }

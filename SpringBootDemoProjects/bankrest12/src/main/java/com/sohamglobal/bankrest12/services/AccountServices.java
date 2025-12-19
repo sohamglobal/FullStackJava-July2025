@@ -24,9 +24,46 @@ public class AccountServices {
 		return accRepo.findById(accno).get();
 	}
 	
+	public List<Account> searchByType(String type)
+	{
+		return accRepo.findByAcctype(type);
+	}
+	
 	public Account addNewAccount(Account obj)
 	{
 		return accRepo.save(obj);
+	}
+	
+	public String depositAmount(int accno,float amount)
+	{
+		String status="";
+		Account obj=accRepo.findById(accno).get();
+		if(obj!=null)
+		{
+			obj.setBalance(obj.getBalance()+amount);
+			accRepo.save(obj);
+			status="success";
+		}
+		else
+			status="failed";
+		
+		return status;
+		
+	}
+	
+	public String deleteAccount(int accno)
+	{
+		String status="";
+		Account obj=accRepo.findById(accno).get();
+		if(obj!=null)
+		{
+			accRepo.delete(obj);
+			status="success";
+		}
+		else
+			status="failed";
+		
+		return status;
 	}
 
 }
