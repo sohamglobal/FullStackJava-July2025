@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fund Transfer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1d2671, #00bf8f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .transfer-card {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #1d2671, #00bf8f);
+            color: white;
+            text-align: center;
+            border-radius: 18px 18px 0 0;
+        }
+
+        .btn-transfer {
+            background: linear-gradient(135deg, #1d2671, #00bf8f);
+            border: none;
+            font-size: 18px;
+        }
+
+        .btn-transfer:hover {
+            opacity: 0.9;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card transfer-card">
+    <div class="card-header p-4">
+        <h3>💸 Fund Transfer</h3>
+        <p class="mb-0">Transfer Amount Between Accounts</p>
+    </div>
+
+    <div class="card-body p-4">
+
+        <div class="mb-3">
+            <label class="form-label">From Account</label>
+            <input type="number" id="fromacc" class="form-control" placeholder="Enter source account number">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">To Account</label>
+            <input type="number" id="toacc" class="form-control" placeholder="Enter destination account number">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <input type="number" id="amount" class="form-control" placeholder="Enter amount">
+        </div>
+
+        <button class="btn btn-transfer text-white w-100" onclick="transferAmount()">
+            Transfer Money
+        </button>
+
+        <div id="message"></div>
+    </div>
+</div>
+
+<script>
+    function transferAmount() {
+
+        const fromacc = document.getElementById("fromacc").value;
+        const toacc = document.getElementById("toacc").value;
+        const amount = document.getElementById("amount").value;
+
+        const messageDiv = document.getElementById("message");
+        messageDiv.innerHTML = "";
+
+        if (!fromacc || !toacc || !amount) {
+            messageDiv.innerHTML = `<div class="error">All fields are required</div>`;
+            return;
+        }
+
+        fetch(`http://localhost:8083/bank/api/transfer?fromacc=${fromacc}&toacc=${toacc}&amount=${amount}`, {
+            method: "PUT"
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Transfer failed");
+            }
+            return response.text();
+        })
+        .then(result => {
+            messageDiv.innerHTML = `<div class="success">✅ ${result}</div>`;
+            document.getElementById("fromacc").value = "";
+            document.getElementById("toacc").value = "";
+            document.getElementById("amount").value = "";
+        })
+        .catch(error => {
+            messageDiv.innerHTML = `<div class="error">❌ ${error.message}</div>`;
+        });
+    }
+</script>
+
+</body>
+</html>
