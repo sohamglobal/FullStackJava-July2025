@@ -65,5 +65,25 @@ public class AccountServices {
 		
 		return status;
 	}
+	
+	public String transfer(int fromacc,int toacc,float amount)
+	{
+		Account objfrom=accRepo.findById(fromacc).get();
+		Account objto=accRepo.findById(toacc).get();
+		String status="";
+		
+		if(objfrom!=null && objto!=null)
+		{
+			objfrom.setBalance(objfrom.getBalance()-amount);
+			objto.setBalance(objto.getBalance()+amount);
+			accRepo.save(objfrom);
+			accRepo.save(objto);
+			status="success";
+		}
+		else
+			status="failed";
+		
+		return status;
+	}
 
 }

@@ -66,5 +66,12 @@ public class AccountController {
 	{
 		return accServices.deleteAccount(accno);
 	}
+	
+	@CrossOrigin(origins = "*")
+	@PutMapping("/transfer")
+	public String transferAmount(int fromacc,int toacc,float amount)
+	{
+		return accServices.transfer(fromacc, toacc, amount);
+	}
 
 }
